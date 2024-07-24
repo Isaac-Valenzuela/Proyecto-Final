@@ -28,7 +28,9 @@ public class CRUD_administrador extends JFrame{
         verButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                ver_cliente_administrador vca = new ver_cliente_administrador();
+                vca.setVisible(true);
+                dispose();
             }
         });
         eliminarButton.addActionListener(new ActionListener() {
