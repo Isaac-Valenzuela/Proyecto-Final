@@ -44,7 +44,9 @@ public class CRUD_administrador extends JFrame{
         actualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                actualizar_cliente_administrador aca = new actualizar_cliente_administrador();
+                aca.setVisible(true);
+                dispose();
             }
         });
         volverButton.addActionListener(new ActionListener() {
