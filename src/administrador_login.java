@@ -51,7 +51,7 @@ public class administrador_login extends JFrame{
         ResultSet rs = pstmt.executeQuery();
 
         if (rs.next()) {
-            menu_catalogo m = new menu_catalogo();
+            menu_administrador m = new menu_administrador();
             m.setVisible(true);
             dispose();
 
