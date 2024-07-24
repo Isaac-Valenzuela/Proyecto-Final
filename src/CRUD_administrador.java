@@ -36,7 +36,9 @@ public class CRUD_administrador extends JFrame{
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                eliminar_cliente_administrador eca = new eliminar_cliente_administrador();
+                eca.setVisible(true);
+                dispose();
             }
         });
         actualizarButton.addActionListener(new ActionListener() {
