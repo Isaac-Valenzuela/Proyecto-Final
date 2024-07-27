@@ -28,7 +28,9 @@ public class CRUD_Productos_Administrador extends JFrame{
         eliminarProductoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Eliminar_Productos_Administrador epa = new Eliminar_Productos_Administrador();
+                epa.setVisible(true);
+                dispose();
             }
         });
         buscarProductoButton.addActionListener(new ActionListener() {
