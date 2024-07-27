@@ -36,7 +36,9 @@ public class CRUD_Productos_Administrador extends JFrame{
         buscarProductoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Ver_Producto_Administrador vpa = new Ver_Producto_Administrador();
+                vpa.setVisible(true);
+                dispose();
             }
         });
         actualizarProductoButton.addActionListener(new ActionListener() {
