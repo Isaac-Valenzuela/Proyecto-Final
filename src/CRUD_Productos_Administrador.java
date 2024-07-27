@@ -42,7 +42,9 @@ public class CRUD_Productos_Administrador extends JFrame{
         actualizarProductoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Actualizar_Producto_Administrador apa = new Actualizar_Producto_Administrador();
+                apa.setVisible(true);
+                dispose();
             }
         });
         volverButton.addActionListener(new ActionListener() {
