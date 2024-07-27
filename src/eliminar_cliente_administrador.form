@@ -15,7 +15,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Eliminar Cliente de la BDD"/>
+          <text value="Eliminar Cajero de la BDD"/>
         </properties>
       </component>
       <component id="2794a" class="javax.swing.JLabel">

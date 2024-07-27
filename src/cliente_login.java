@@ -8,7 +8,6 @@ public class cliente_login extends JFrame{
     private JTextField textField1; //Correo
     private JPasswordField passwordField1; //Constrasenia
     private JButton iniciarSesionButton;
-    private JButton crearButton;
     private JButton volverButton;
 
     public cliente_login(){
@@ -26,15 +25,6 @@ public class cliente_login extends JFrame{
                 }catch (SQLException ex){
                     ex.printStackTrace();
                 }
-            }
-        });
-
-        crearButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                crear_cliente cc = new crear_cliente();
-                cc.setVisible(true);
-                dispose();
             }
         });
 
