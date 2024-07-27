@@ -43,7 +43,7 @@ public class eliminar_cliente_administrador  extends JFrame{
         String cedula = textField1.getText();
 
         Connection conectamos = connection();
-        String sql = "DELETE FROM cliente WHERE cedula = ?";
+        String sql = "DELETE FROM cajero WHERE cedula = ?";
         PreparedStatement pstmt = conectamos.prepareStatement(sql);
         pstmt.setString(1, cedula);
 

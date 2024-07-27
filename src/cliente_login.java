@@ -45,7 +45,7 @@ public class cliente_login extends JFrame{
         String pass = passwordField1.getText();
 
         Connection conectamos = connection();
-        String query="SELECT * FROM cliente WHERE correo = ? AND contrasenia=?";
+        String query="SELECT * FROM cajero WHERE correo = ? AND contrasenia=?";
         PreparedStatement pstmt = conectamos.prepareStatement(query);
         pstmt.setString(1, user);
         pstmt.setString(2, pass);

@@ -53,7 +53,7 @@ public class crear_cliente_administrador extends JFrame{
         String direccion = textField6.getText();
 
         Connection conectamos = connection();
-        String sql = "INSERT INTO cliente(cedula, correo, nombre, contrasenia, edad, direccion)" +
+        String sql = "INSERT INTO cajero(cedula, correo, nombre, contrasenia, edad, direccion)" +
                 "VALUES(?,?,?,?,?,?)";
         PreparedStatement pstmt = conectamos.prepareStatement(sql);
         pstmt.setString(1, cedula);

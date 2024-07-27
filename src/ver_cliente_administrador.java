@@ -39,7 +39,7 @@ public class ver_cliente_administrador extends JFrame {
     public void busqueda()throws SQLException {
         int ci = Integer.parseInt(textField1.getText());
         Connection conectamos = connection();
-        String sql = "Select * from cliente where cedula = ?";
+        String sql = "Select * from cajero where cedula = ?";
         PreparedStatement pstmt = conectamos.prepareStatement(sql);
         pstmt.setInt(1, ci);
         ResultSet rs = pstmt.executeQuery();

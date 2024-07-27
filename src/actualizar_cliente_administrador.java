@@ -47,7 +47,7 @@ public class actualizar_cliente_administrador extends JFrame{
         String datoNuevo = textField3.getText();
 
         Connection conectamos = connection();
-        String sql = "UPDATE cliente SET " + columna + " = ? WHERE cedula = ?";
+        String sql = "UPDATE cajero SET " + columna + " = ? WHERE cedula = ?";
         PreparedStatement pstmt = conectamos.prepareStatement(sql);
         pstmt.setString(1, datoNuevo);
         pstmt.setString(2, cedula);
