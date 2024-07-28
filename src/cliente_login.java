@@ -17,6 +17,17 @@ public class cliente_login extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel1);
 
+        if (volverButton != null) {
+            volverButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    menu_login ml = new menu_login();
+                    ml.setVisible(true);
+                    dispose();
+                }
+            });
+        }
+
         iniciarSesionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -25,15 +36,6 @@ public class cliente_login extends JFrame{
                 }catch (SQLException ex){
                     ex.printStackTrace();
                 }
-            }
-        });
-
-        volverButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu_login ml = new menu_login();
-                ml.setVisible(true);
-                dispose();
             }
         });
 

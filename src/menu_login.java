@@ -17,8 +17,8 @@ public class menu_login extends JFrame {
         IRButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cliente_login c1 = new cliente_login();
-                c1.setVisible(true);
+                cliente_login c = new cliente_login();
+                c.setVisible(true);
                 dispose();
             }
         });
