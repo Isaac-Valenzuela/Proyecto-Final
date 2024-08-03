@@ -32,7 +32,7 @@ public class menu_catalogo extends JFrame{
         cerrarSesionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                menu_login ml = new menu_login();
+                Login ml = new Login();
                 ml.setVisible(true);
                 dispose();
             }

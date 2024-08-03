@@ -18,7 +18,7 @@ public class menu_administrador extends JFrame {
         IRButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CRUD_administrador cd = new CRUD_administrador();
+                Administracion_Cajeros cd = new Administracion_Cajeros();
                 cd.setVisible(true);
                 dispose();
             }
@@ -26,7 +26,7 @@ public class menu_administrador extends JFrame {
         IRButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CRUD_Productos_Administrador al = new CRUD_Productos_Administrador();
+                Administrador_Productos al = new Administrador_Productos();
                 al.setVisible(true);
                 dispose();
             }
@@ -35,7 +35,7 @@ public class menu_administrador extends JFrame {
         volverButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                administrador_login al = new administrador_login();
+                Login al = new Login();
                 al.setVisible(true);
                 dispose();
             }
