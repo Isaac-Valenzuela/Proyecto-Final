@@ -6,6 +6,18 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
+import java.io.IOException;
+
+
+
 public class Cajero extends JFrame {
     private JPanel panel1;
     private JTextField clienteNombreField;
@@ -239,6 +251,9 @@ public class Cajero extends JFrame {
             pstmt.close();
             conectamos.commit();
             registro.append("Venta registrada exitosamente. Total: " + total + "\n");
+
+            // Generar factura PDF
+            generarFacturaPDF(clienteNombre, clienteCedula, clienteDireccion, productList, total);
         } catch (SQLException ex) {
             conectamos.rollback();
             registro.append("Error al registrar la venta.\n");
@@ -249,6 +264,8 @@ public class Cajero extends JFrame {
             productList.clear();
         }
     }
+
+
 
     // Product class to hold product details
     class Product {
@@ -280,4 +297,75 @@ public class Cajero extends JFrame {
             return cantidad;
         }
     }
+
+    public void generarFacturaPDF(String clienteNombre, String clienteCedula, String clienteDireccion, List<Product> productList, double total) {
+        // Generate a unique file name with timestamp
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String dest = "factura_" + timestamp + ".pdf";
+        PDDocument document = new PDDocument();
+        PDPage page = new PDPage();
+        document.addPage(page);
+
+        try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 20);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(220, 750);
+            contentStream.showText("Factura de Compra");
+            contentStream.endText();
+
+            contentStream.setFont(PDType1Font.HELVETICA, 12);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(50, 700);
+            contentStream.showText("Nombre del Cliente: " + clienteNombre);
+            contentStream.endText();
+
+            contentStream.beginText();
+            contentStream.newLineAtOffset(50, 680);
+            contentStream.showText("Cédula del Cliente: " + clienteCedula);
+            contentStream.endText();
+
+            contentStream.beginText();
+            contentStream.newLineAtOffset(50, 660);
+            contentStream.showText("Dirección del Cliente: " + clienteDireccion);
+            contentStream.endText();
+
+            float yPosition = 620;
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(50, yPosition);
+            contentStream.showText("ID       Nombre       Precio       Cantidad       Total");
+            contentStream.endText();
+
+            contentStream.setFont(PDType1Font.HELVETICA, 12);
+            for (Product product : productList) {
+                yPosition -= 20;
+                contentStream.beginText();
+                contentStream.newLineAtOffset(50, yPosition);
+                contentStream.showText(product.getId() + "       " + product.getNombre() + "       " + product.getPrecio() + "       " + product.getCantidad() + "       " + (product.getPrecio() * product.getCantidad()));
+                contentStream.endText();
+            }
+
+            yPosition -= 40;
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(50, yPosition);
+            contentStream.showText("Total: " + total);
+            contentStream.endText();
+
+            contentStream.close();  // Ensure the content stream is closed before saving the document
+            document.save(dest);
+            System.out.println("Factura generada exitosamente: " + dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                document.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
 }

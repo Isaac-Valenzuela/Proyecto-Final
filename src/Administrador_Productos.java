@@ -40,7 +40,7 @@ public class Administrador_Productos extends JFrame {
 
     public Administrador_Productos(){
         setTitle("Administrador");
-        setSize(600,644);
+        setSize(600,665);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel1);

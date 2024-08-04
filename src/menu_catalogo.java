@@ -26,7 +26,9 @@ public class menu_catalogo extends JFrame{
         reportesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                ReporteVentas r = new ReporteVentas();
+                r.setVisible(true);
+                dispose();
             }
         });
         cerrarSesionButton.addActionListener(new ActionListener() {
