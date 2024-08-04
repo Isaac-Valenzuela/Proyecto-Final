@@ -7,6 +7,11 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import java.util.Date;
 
 public class ReporteVentas extends JFrame {
     private JTabbedPane tabbedPane;
@@ -59,12 +64,18 @@ public class ReporteVentas extends JFrame {
         gbc.gridwidth = 2;
         panelReporte.add(generarPDFButton, gbc);
 
+        JButton cerrarSesionButton = new JButton("Cerrar Sesión");
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 2;
+        panelReporte.add(cerrarSesionButton, gbc);
+
         ventasList = new ArrayList<>();
-        String[] columnNames = {"ID", "Nombre Cliente", "Cédula", "Dirección", "Total", "Fecha"};
+        String[] columnNames = {"VentaID", "ClienteNombre", "ClienteCedula", "ClienteDireccion", "Total", "Fecha"};
         table = new JTable(new Object[0][6], columnNames);
         scrollPane = new JScrollPane(table);
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.BOTH;
         gbc.weightx = 1.0;
@@ -96,6 +107,13 @@ public class ReporteVentas extends JFrame {
                 }
             }
         });
+
+        cerrarSesionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cerrarSesion();
+            }
+        });
     }
 
     public Connection connection() throws SQLException {
@@ -119,7 +137,7 @@ public class ReporteVentas extends JFrame {
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
             Venta venta = new Venta(
-                    rs.getInt("ID"),
+                    rs.getInt("VentaID"),
                     rs.getString("ClienteNombre"),
                     rs.getString("ClienteCedula"),
                     rs.getString("ClienteDireccion"),
@@ -152,9 +170,67 @@ public class ReporteVentas extends JFrame {
     }
 
     public void generarReportePDF() throws IOException {
-        // Similar to the previous code, generate a PDF using PDFBox
-        // You can use ventasList to get the data
-        // For brevity, not repeating the PDF generation code here
+        // Crear un nuevo documento
+        PDDocument document = new PDDocument();
+
+        // Añadir una página al documento
+        PDPage page = new PDPage();
+        document.addPage(page);
+
+        // Iniciar un flujo de contenido para la página
+        PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
+        // Configurar la fuente y el tamaño de la fuente
+        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 14);
+        contentStream.beginText();
+        contentStream.setLeading(14.5f);
+        contentStream.newLineAtOffset(50, 750);
+
+        // Escribir el título del reporte
+        contentStream.showText("Reporte de Ventas");
+        contentStream.newLine();
+        contentStream.newLine();
+
+        // Escribir los encabezados de las columnas
+        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+        contentStream.showText("ID         Nombre Cliente         Cédula         Dirección         Total         Fecha");
+        contentStream.newLine();
+
+        // Escribir los datos de las ventas
+        contentStream.setFont(PDType1Font.HELVETICA, 12);
+        for (Venta venta : ventasList) {
+            String line = String.format("%-10s %-20s %-15s %-20s %-10.2f %s",
+                    venta.getId(),
+                    venta.getClienteNombre(),
+                    venta.getClienteCedula(),
+                    venta.getClienteDireccion(),
+                    venta.getTotal(),
+                    venta.getFecha());
+            contentStream.showText(line);
+            contentStream.newLine();
+        }
+
+        // Terminar el flujo de contenido
+        contentStream.endText();
+        contentStream.close();
+
+        // Obtener la fecha actual para el nombre del archivo
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String fechaActual = dateFormat.format(new Date());
+        String nombreArchivo = "ReporteVentas_" + fechaActual + ".pdf";
+
+        // Guardar el documento en un archivo con la fecha en el nombre
+        document.save(nombreArchivo);
+
+        // Cerrar el documento
+        document.close();
+
+        // Mostrar mensaje de confirmación
+        JOptionPane.showMessageDialog(this, "Reporte PDF generado exitosamente. Guardado como " + nombreArchivo);
+    }
+    public void cerrarSesion() {
+        dispose(); // Cierra la ventana actual
+        new Login(); // Abre la ventana de inicio de sesión
     }
 
     class Venta {
@@ -199,12 +275,4 @@ public class ReporteVentas extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ReporteVentas().setVisible(true);
-            }
-        });
-    }
 }

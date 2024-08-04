@@ -206,6 +206,7 @@ public class Cajero extends JFrame {
         String clienteNombre = clienteNombreField.getText();
         String clienteCedula = clienteCedulaField.getText();
         String clienteDireccion = clienteDireccionField.getText();
+        String fechaActual = new SimpleDateFormat("yyyy-MM-dd").format(new Date()); // Obtener la fecha actual
 
         Connection conectamos = connection();
         try {
@@ -223,12 +224,13 @@ public class Cajero extends JFrame {
                 updatePstmt.close();
             }
 
-            String sql = "INSERT INTO Ventas (ClienteNombre, ClienteCedula, ClienteDireccion, Total) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO Ventas (ClienteNombre, ClienteCedula, ClienteDireccion, Fecha, Total) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conectamos.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, clienteNombre);
             pstmt.setString(2, clienteCedula);
             pstmt.setString(3, clienteDireccion);
-            pstmt.setDouble(4, total);
+            pstmt.setString(4, fechaActual); // Añadir la fecha actual
+            pstmt.setDouble(5, total);
             pstmt.executeUpdate();
 
             ResultSet generatedKeys = pstmt.getGeneratedKeys();
@@ -264,6 +266,7 @@ public class Cajero extends JFrame {
             productList.clear();
         }
     }
+
 
 
 
