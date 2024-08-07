@@ -78,6 +78,9 @@ public class Administracion_Cajeros extends JFrame{
         salirButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Login l = new Login();
+                l.setVisible(true);
+                dispose();
             }
         });
     }
