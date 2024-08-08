@@ -116,6 +116,7 @@ public class ReporteVentas extends JFrame {
         });
     }
 
+    //Funcion para conectar
     public Connection connection() throws SQLException {
         String url = "jdbc:mysql://ufopvc9kf65j4cmx:CM1W2HBoNddWsjJzWMaC@bmfp6c3mefmlhvjslupe-mysql.services.clever-cloud.com:3306/bmfp6c3mefmlhvjslupe";
         String user = "ufopvc9kf65j4cmx";
@@ -123,6 +124,7 @@ public class ReporteVentas extends JFrame {
         return DriverManager.getConnection(url, user, password);
     }
 
+    //Funcion para filtrar por ventas
     public void filtrarVentas() throws SQLException {
         ventasList.clear();
         String fechaInicio = fechaInicioField.getText();
@@ -154,6 +156,7 @@ public class ReporteVentas extends JFrame {
         actualizarTabla();
     }
 
+    //Funcion para actualizar tabla
     public void actualizarTabla() {
         String[] columnNames = {"ID", "Nombre Cliente", "Cédula", "Dirección", "Total", "Fecha"};
         Object[][] data = new Object[ventasList.size()][6];
@@ -169,6 +172,7 @@ public class ReporteVentas extends JFrame {
         table.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
     }
 
+    //Funcion para generar el pdf
     public void generarReportePDF() throws IOException {
         // Crear un nuevo documento
         PDDocument document = new PDDocument();

@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Proyecto_Final:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Proyecto_Final_jar</output-path>
+    <root id="archive" name="Proyecto_Final.jar">
+      <element id="module-output" name="Proyecto_Final" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/pdfbox-app-2.0.32.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/jdbc/mysql-connector-j-9.0.0/mysql-connector-j-9.0.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

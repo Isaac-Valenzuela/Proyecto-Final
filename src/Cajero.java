@@ -35,13 +35,13 @@ public class Cajero extends JFrame {
     private List<Product> productList = new ArrayList<>();
 
     public Cajero() {
-        // Frame settings
+        // Frame configuraciones
         setTitle("Formulario de Facturación");
         setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Initialize components
+        // Inicializar componentes
         panel1 = new JPanel();
         panel1.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -132,7 +132,7 @@ public class Cajero extends JFrame {
         gbc.anchor = GridBagConstraints.SOUTHEAST;
         panel1.add(volverButton, gbc);
 
-        // Add panel to frame
+        // añadir el panel al frame
         add(panel1);
 
         // Action Listeners
@@ -168,6 +168,7 @@ public class Cajero extends JFrame {
         });
     }
 
+    //Funcion conectar
     public Connection connection() throws SQLException {
         String url = "jdbc:mysql://ufopvc9kf65j4cmx:CM1W2HBoNddWsjJzWMaC@bmfp6c3mefmlhvjslupe-mysql.services.clever-cloud.com:3306/bmfp6c3mefmlhvjslupe";
         String user = "ufopvc9kf65j4cmx";
@@ -175,6 +176,7 @@ public class Cajero extends JFrame {
         return DriverManager.getConnection(url, user, password);
     }
 
+    //Funcion agregar productos
     public void agregarProducto() throws SQLException {
         String id = productoIDField.getText();
         Connection conectamos = connection();
@@ -202,6 +204,7 @@ public class Cajero extends JFrame {
         conectamos.close();
     }
 
+    //Funcion para registrar ventas
     public void registrarVenta() throws SQLException {
         String clienteNombre = clienteNombreField.getText();
         String clienteCedula = clienteCedulaField.getText();
@@ -270,7 +273,7 @@ public class Cajero extends JFrame {
 
 
 
-    // Product class to hold product details
+    // Clase de producto para contener detalles del producto
     class Product {
         private int id;
         private String nombre;
@@ -301,8 +304,9 @@ public class Cajero extends JFrame {
         }
     }
 
+    //Funcion para generar el pdf
     public void generarFacturaPDF(String clienteNombre, String clienteCedula, String clienteDireccion, List<Product> productList, double total) {
-        // Generate a unique file name with timestamp
+        // Genera un nombre de archivo unico con fecha y hora
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String dest = "factura_" + timestamp + ".pdf";
         PDDocument document = new PDDocument();
