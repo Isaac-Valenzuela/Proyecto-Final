@@ -13,6 +13,11 @@ public class Login extends JFrame {
     private JPasswordField passwordField2;
     private JButton iniciarSesionButton1;
 
+    /**
+     * Clase login
+     * @author Isaac VALENZUELA
+     * @since 27/07/2024
+     */
     public Login(){
         setTitle("Login");
         setSize(600,600);

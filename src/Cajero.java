@@ -16,7 +16,12 @@ import java.util.Date;
 
 import java.io.IOException;
 
-
+/**
+ * Clase cajero
+ * @author Isaac VALENZUELA
+ * @version 1.0.0
+ * @since 27/07/2024
+ */
 
 public class Cajero extends JFrame {
     private JPanel panel1;

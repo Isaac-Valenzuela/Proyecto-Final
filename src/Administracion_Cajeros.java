@@ -23,6 +23,12 @@ public class Administracion_Cajeros extends JFrame{
     private JButton eliminarButton;
     private JButton salirButton;
 
+    /**
+     * Clase Administrador de cajeros
+     * @author Isaac VALENZUELA
+     * @version 1.0.0
+     * @since 27/07/2024
+     */
 
     public Administracion_Cajeros(){
         setTitle("Admistrador");

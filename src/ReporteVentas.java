@@ -13,6 +13,12 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import java.util.Date;
 
+/**
+ * Clase reporte de ventas
+ * @author Isaac VALENZUELA
+ * @version 1.0.0
+ * @since 27/07/2024
+ */
 public class ReporteVentas extends JFrame {
     private JTabbedPane tabbedPane;
     private JPanel panelReporte;

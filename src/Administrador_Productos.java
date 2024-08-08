@@ -9,6 +9,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * Clase Administrador de productos
+ * @version 1.0.0
+ * @since 27/07/2024
+ */
 public class Administrador_Productos extends JFrame {
     private JPanel panel1;
     private JTabbedPane tabbedPane1;

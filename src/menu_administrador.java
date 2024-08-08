@@ -2,6 +2,12 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Clase menu del admistrador
+ * @author Isaac VALENZUELA
+ * @version 1.0.0
+ * @since 27/07/2024
+ */
 public class menu_administrador extends JFrame {
     private JPanel panel1;
     private JButton IRButton;
